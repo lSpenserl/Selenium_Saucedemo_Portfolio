@@ -18,22 +18,29 @@ public class BasePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
+    protected WebElement find(By locator) {
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(locator)
+        );
+    }
+
+    protected boolean isDisplayed(By locator) {
+        return find(locator).isDisplayed();
+    }
+
     protected void click(By locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+        wait.until(
+                ExpectedConditions.elementToBeClickable(locator)
+        ).click();
     }
 
     protected void setText(By locator, String text) {
-        WebElement element = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(locator)
-        );
-
+        WebElement element = find(locator);
         element.clear();
         element.sendKeys(text);
     }
 
     protected String getText(By locator) {
-        return wait.until(
-                ExpectedConditions.visibilityOfElementLocated(locator)
-        ).getText();
+        return find(locator).getText();
     }
 }

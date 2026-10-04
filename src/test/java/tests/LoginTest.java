@@ -3,7 +3,6 @@ package tests;
 import base.BaseTest;
 import org.junit.jupiter.api.Test;
 import pages.LoginPage;
-import pages.ProductsPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,10 +14,11 @@ public class LoginTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage(driver);
 
-        ProductsPage productsPage =
-                loginPage.realizarLogin("standard_user", "secret_sauce");
-
-        assertTrue(productsPage.isPaginaProdutosExibida());
+        assertTrue(
+                loginPage
+                        .realizarLogin("standard_user", "secret_sauce")
+                        .isPaginaProdutosExibida()
+        );
     }
 
     @Test
@@ -26,8 +26,8 @@ public class LoginTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage(driver);
 
-        loginPage.informarUsuario("standard_user");
-        loginPage.informarSenha("senha_invalida");
+        loginPage.informarUsuario("standard_user_Invalido");
+        loginPage.informarSenha("secret_sauce_invalido");
         loginPage.clicarLogin();
 
         assertEquals(
