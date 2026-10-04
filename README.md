@@ -1,23 +1,30 @@
 # Selenium Saucedemo Portfolio
 
-Projeto de automação de testes E2E utilizando **Java + Selenium WebDriver + JUnit 5 + Maven**, desenvolvido como parte do meu portfólio profissional.
+Projeto de automação de testes E2E da aplicação [SauceDemo](https://www.saucedemo.com/), desenvolvido com foco em boas práticas de automação e organização de código.
 
-Sou **QA Sr**, com experiência em qualidade de software e automação de testes, e utilizo este repositório para demonstrar, na prática, a aplicação de boas práticas de **automação, POO e arquitetura de testes**.
+## Sobre o projeto
 
-## Objetivo
+A ideia deste repositório é construir, de forma gradual, um framework de automação utilizando **Java + Selenium WebDriver + JUnit 5 + Maven**, aplicando conceitos de **POO, Page Object Model e separação de responsabilidades**.
 
-O projeto busca demonstrar uma estrutura de automação organizada e escalável, explorando conceitos como:
+Os testes são estruturados para manter o código de automação reutilizável, organizado e fácil de evoluir.
 
-- Page Object Model (POM)
-- Encapsulamento, herança e abstração
-- Factory Pattern
-- Explicit Wait
-- Separação de responsabilidades
-- Configuração externa
-- Testes positivos e negativos
+Atualmente, o projeto contempla cenários de **login com sucesso e login com credenciais inválidas**, utilizando Page Objects, métodos reutilizáveis, configuração externa e **Explicit Wait**.
+
+## Estrutura
+
+- **BasePage**: centraliza ações comuns do Selenium.
+- **DriverFactory**: responsável pela criação do WebDriver.
+- **ConfigReader**: leitura das configurações do projeto.
+- **Page Objects**: representam as páginas e seus comportamentos.
+- **BaseTest**: estrutura comum para execução dos testes.
+- **Testes**: cenários funcionais automatizados com JUnit 5.
+
+## Técnicas e conceitos
+
+**Page Object Model · Encapsulamento · Herança · Abstração · Factory Pattern · Explicit Wait · Separação de responsabilidades · Testes positivos e negativos**
 
 ## Tecnologias
 
 **Java · Selenium WebDriver · JUnit 5 · Maven · IntelliJ IDEA**
 
-Este projeto está em evolução, com a implementação gradual de novas técnicas e melhorias de arquitetura.
+O projeto está em evolução e será incrementado com novas funcionalidades e melhorias de arquitetura ao longo do desenvolvimento.
