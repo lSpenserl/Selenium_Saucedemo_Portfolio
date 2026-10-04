@@ -1,4 +1,4 @@
-# Selenium Saucedemo Portfolio
+# Selenium Saucedemo Portfólio 
 
 Projeto de automação de testes E2E da aplicação [SauceDemo](https://www.saucedemo.com/), desenvolvido com foco em boas práticas de automação e organização de código.
 
