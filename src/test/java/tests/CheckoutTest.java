@@ -1,6 +1,7 @@
 package tests;
 
 import base.BaseTest;
+import data.CheckoutData;
 import org.junit.jupiter.api.Test;
 import pages.CartPage;
 import pages.CheckoutCompletePage;
@@ -17,13 +18,7 @@ public class CheckoutTest extends BaseTest {
     @Test
     void deveFinalizarCompraComSucesso() {
 
-        LoginPage loginPage = new LoginPage(driver);
-
-        ProductsPage productsPage =
-                loginPage.realizarLogin(
-                        "standard_user",
-                        "secret_sauce"
-                );
+        ProductsPage productsPage = realizarLogin();
 
         productsPage.adicionarProduto("Sauce Labs Backpack");
 
@@ -31,9 +26,9 @@ public class CheckoutTest extends BaseTest {
 
         CheckoutPage checkoutPage = cartPage.clicarCheckout();
 
-        checkoutPage.informarNome("Leandro");
-        checkoutPage.informarSobrenome("Barboza");
-        checkoutPage.informarCep("06700-000");
+        checkoutPage.informarNome(CheckoutData.FIRST_NAME);
+        checkoutPage.informarSobrenome(CheckoutData.LAST_NAME);
+        checkoutPage.informarCep(CheckoutData.POSTAL_CODE);
 
         CheckoutOverviewPage overviewPage =
                 checkoutPage.clicarContinuar();

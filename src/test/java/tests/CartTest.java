@@ -1,9 +1,9 @@
 package tests;
 
 import base.BaseTest;
+import data.ProductData;
 import org.junit.jupiter.api.Test;
 import pages.CartPage;
-import pages.LoginPage;
 import pages.ProductsPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,15 +14,9 @@ public class CartTest extends BaseTest {
     @Test
     void deveAdicionarProdutoEValidarCarrinho() {
 
-        LoginPage loginPage = new LoginPage(driver);
+        ProductsPage productsPage = realizarLogin();
 
-        ProductsPage productsPage =
-                loginPage.realizarLogin(
-                        "standard_user",
-                        "secret_sauce"
-                );
-
-        productsPage.adicionarProduto("Sauce Labs Backpack");
+        productsPage.adicionarProduto(ProductData.BACKPACK);
 
         CartPage cartPage = productsPage.clicarCarrinho();
 

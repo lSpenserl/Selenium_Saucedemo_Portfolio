@@ -1,6 +1,7 @@
 package tests;
 
 import base.BaseTest;
+import data.LoginData;
 import org.junit.jupiter.api.Test;
 import pages.LoginPage;
 
@@ -16,7 +17,7 @@ public class LoginTest extends BaseTest {
 
         assertTrue(
                 loginPage
-                        .realizarLogin("standard_user", "secret_sauce")
+                        .realizarLogin(LoginData.STANDARD_USER, LoginData.VALID_PASSWORD)
                         .isPaginaProdutosExibida()
         );
     }
@@ -26,8 +27,8 @@ public class LoginTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage(driver);
 
-        loginPage.informarUsuario("standard_user_Invalido");
-        loginPage.informarSenha("secret_sauce_invalido");
+        loginPage.informarUsuario(LoginData.INVALID_USER);
+        loginPage.informarSenha(LoginData.INVALID_PASSWORD);
         loginPage.clicarLogin();
 
         assertEquals(
