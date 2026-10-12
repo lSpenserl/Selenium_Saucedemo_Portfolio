@@ -12,6 +12,13 @@ on:
 jobs:
   smoke-tests:
 
+    strategy:
+      matrix:
+        browser:
+          - chrome
+          - edge
+          - firefox
+
     runs-on: ubuntu-latest
 
     steps:
@@ -27,18 +34,22 @@ jobs:
           cache: maven
 
       - name: Executar Smoke Tests
-        run: mvn --batch-mode test -Psmoke -Dbrowser=chrome -Dheadless=true
+        run: >
+          mvn --batch-mode test
+          -Psmoke
+          -Dbrowser=${{ matrix.browser }}
+          -Dheadless=true
 
       - name: Upload dos screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: screenshots
+          name: screenshots-${{ matrix.browser }}
           path: target/screenshots/
 
       - name: Upload dos relatórios do Surefire
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: surefire-reports
+          name: surefire-reports-${{ matrix.browser }}
           path: target/surefire-reports/
