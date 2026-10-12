@@ -54,6 +54,9 @@ public class DriverFactory {
 
         EdgeOptions options = new EdgeOptions();
 
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+
         if (headless) {
             options.addArguments("--headless=new");
         }
