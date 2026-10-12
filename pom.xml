@@ -17,11 +17,30 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <selenium.version>4.35.0</selenium.version>
-        <junit.version>5.13.4</junit.version>
+        <junit.version>6.1.0</junit.version>
 
+        <!-- Allure -->
+        <allure.version>3.0.0</allure.version>
+        <aspectj.version>1.9.25</aspectj.version>
+
+        <!-- Maven Profiles -->
         <groups></groups>
-
     </properties>
+
+    <!-- Gerenciamento das versões do Allure -->
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-bom</artifactId>
+                <version>${allure.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
 
@@ -40,25 +59,63 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Allure + JUnit Jupiter -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
 
-            <!-- Maven Surefire: execução dos testes -->
+            <!-- Maven Surefire -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.3</version>
+
                 <configuration>
+
+                    <!-- JUnit 5 Tags / Maven Profiles -->
                     <groups>${groups}</groups>
+
+                    <!-- Allure / AspectJ -->
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+
                 </configuration>
+
+                <dependencies>
+
+                    <!-- AspectJ Weaver -->
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+
+                </dependencies>
+
+            </plugin>
+
+            <!-- Allure Maven -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>3.0.2</version>
             </plugin>
 
         </plugins>
     </build>
+
+    <!-- Maven Profiles -->
     <profiles>
 
+        <!-- Smoke -->
         <profile>
             <id>smoke</id>
 
@@ -67,6 +124,7 @@
             </properties>
         </profile>
 
+        <!-- Regression -->
         <profile>
             <id>regression</id>
 
@@ -76,4 +134,5 @@
         </profile>
 
     </profiles>
+
 </project>
