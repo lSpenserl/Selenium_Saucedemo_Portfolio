@@ -2,15 +2,18 @@ package tests;
 
 import base.BaseTest;
 import data.LoginData;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.LoginPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Tag("login")
 public class LoginTest extends BaseTest {
 
     @Test
+    @Tag("smoke")
     void deveRealizarLoginComSucesso() {
 
         LoginPage loginPage = new LoginPage(driver);
@@ -23,6 +26,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @Tag("regression")
     void deveExibirErroAoInformarSenhaInvalida() {
 
         LoginPage loginPage = new LoginPage(driver);

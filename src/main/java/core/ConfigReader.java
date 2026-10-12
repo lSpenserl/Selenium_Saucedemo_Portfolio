@@ -14,17 +14,29 @@ public class ConfigReader {
                 .getResourceAsStream("config.properties")) {
 
             if (input == null) {
-                throw new RuntimeException("Arquivo config.properties não encontrado.");
+                throw new RuntimeException(
+                        "Arquivo config.properties não encontrado."
+                );
             }
 
             properties.load(input);
 
         } catch (IOException e) {
-            throw new RuntimeException("Erro ao carregar o config.properties.", e);
+            throw new RuntimeException(
+                    "Erro ao carregar o config.properties.",
+                    e
+            );
         }
     }
 
     public static String get(String key) {
+
+        String systemProperty = System.getProperty(key);
+
+        if (systemProperty != null && !systemProperty.isBlank()) {
+            return systemProperty;
+        }
+
         return properties.getProperty(key);
     }
 }

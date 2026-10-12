@@ -3,8 +3,10 @@ package base;
 import core.ConfigReader;
 import core.DriverFactory;
 import data.LoginData;
+import extensions.ScreenshotExtension;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
 import pages.ProductsPage;
@@ -12,6 +14,10 @@ import pages.ProductsPage;
 public class BaseTest {
 
     protected WebDriver driver;
+
+    @RegisterExtension
+    protected final ScreenshotExtension screenshotExtension =
+            new ScreenshotExtension(() -> driver);
 
     @BeforeEach
     public void setUp() {

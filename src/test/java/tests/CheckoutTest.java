@@ -2,6 +2,7 @@ package tests;
 
 import base.BaseTest;
 import data.CheckoutData;
+import data.ProductData;
 import org.junit.jupiter.api.Test;
 import pages.CartPage;
 import pages.CheckoutCompletePage;
@@ -20,7 +21,7 @@ public class CheckoutTest extends BaseTest {
 
         ProductsPage productsPage = realizarLogin();
 
-        productsPage.adicionarProduto("Sauce Labs Backpack");
+        productsPage.adicionarProduto(ProductData.BACKPACK);
 
         CartPage cartPage = productsPage.clicarCarrinho();
 
@@ -36,7 +37,7 @@ public class CheckoutTest extends BaseTest {
         assertTrue(overviewPage.isPaginaOverviewExibida());
 
         assertEquals(
-                "Sauce Labs Backpack",
+                ProductData.BACKPACK,
                 overviewPage.obterNomeProduto()
         );
 

@@ -15,7 +15,15 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        int timeout = Integer.parseInt(
+                ConfigReader.get("wait.timeout")
+        );
+
+        this.wait = new WebDriverWait(
+                driver,
+                Duration.ofSeconds(timeout)
+        );
     }
 
     protected WebElement find(By locator) {
@@ -36,6 +44,7 @@ public class BasePage {
 
     protected void setText(By locator, String text) {
         WebElement element = find(locator);
+
         element.clear();
         element.sendKeys(text);
     }
