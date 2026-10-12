@@ -41,7 +41,15 @@ Regression Tests
     └── Firefox
     ↓
 Allure Report
+    ↓
+GitHub Pages
 ```
+
+## 📊 Allure Report
+
+O relatório mais recente da suíte de Regression é publicado automaticamente pelo pipeline no GitHub Pages:
+
+[🔎 Visualizar Allure Report](https://lspenserl.github.io/Selenium_Saucedemo_Portfolio/)
 
 ## Estrutura
 
