@@ -1,6 +1,7 @@
 package pages;
 
 import core.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -15,26 +16,30 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    @Step("Informar usuário: {usuario}")
+    public void informarUsuario(String usuario) {
+        setText(campoUsuario, usuario);
+    }
+
+    @Step("Informar senha")
+    public void informarSenha(String senha) {
+        setText(campoSenha, senha);
+    }
+
+    @Step("Clicar em Login")
+    public ProductsPage clicarLogin() {
+        click(botaoLogin);
+
+        return new ProductsPage(driver);
+    }
+
+    @Step("Realizar login com usuário: {usuario}")
     public ProductsPage realizarLogin(String usuario, String senha) {
 
         informarUsuario(usuario);
         informarSenha(senha);
 
         return clicarLogin();
-    }
-
-    public void informarUsuario(String usuario) {
-        setText(campoUsuario, usuario);
-    }
-
-    public void informarSenha(String senha) {
-        setText(campoSenha, senha);
-    }
-
-    public ProductsPage clicarLogin() {
-        click(botaoLogin);
-
-        return new ProductsPage(driver);
     }
 
     public String obterMensagemErro() {

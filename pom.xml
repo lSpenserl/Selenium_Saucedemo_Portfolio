@@ -16,7 +16,10 @@
         <maven.compiler.target>26</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <!-- Selenium -->
         <selenium.version>4.35.0</selenium.version>
+
+        <!-- JUnit -->
         <junit.version>6.1.0</junit.version>
 
         <!-- Allure -->
@@ -51,7 +54,7 @@
             <version>${selenium.version}</version>
         </dependency>
 
-        <!-- JUnit 5 -->
+        <!-- JUnit -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -59,11 +62,17 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Allure + JUnit Jupiter -->
+        <!-- Allure JUnit Jupiter -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-jupiter</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Allure Core / Annotations (@Step, etc.) -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
         </dependency>
 
     </dependencies>
@@ -79,7 +88,7 @@
 
                 <configuration>
 
-                    <!-- JUnit 5 Tags / Maven Profiles -->
+                    <!-- JUnit Tags / Maven Profiles -->
                     <groups>${groups}</groups>
 
                     <!-- Allure / AspectJ -->

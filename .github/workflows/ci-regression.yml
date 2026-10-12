@@ -8,6 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
+
   regression-tests:
 
     strategy:
@@ -53,3 +54,73 @@ jobs:
         with:
           name: surefire-reports-regression-${{ matrix.browser }}
           path: target/surefire-reports/
+
+      - name: Upload dos resultados do Allure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-${{ matrix.browser }}
+          path: target/allure-results/
+
+
+  build-report:
+
+    if: always()
+
+    needs:
+      - regression-tests
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar resultados do Allure
+        uses: actions/download-artifact@v5
+        with:
+          pattern: allure-results-*
+          path: allure-results
+          merge-multiple: true
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Instalar Allure
+        run: npm install -g allure@3.4.1
+
+      - name: Gerar relatório Allure
+        run: allure generate allure-results -o allure-report
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Publicar artifact do GitHub Pages
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: allure-report
+
+
+  deploy-report:
+
+    if: always()
+
+    needs:
+      - build-report
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+
+      - name: Publicar Allure no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
