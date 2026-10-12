@@ -1,0 +1,53 @@
+name: CI - Smoke Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  smoke-tests:
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        browser:
+          - chrome
+          - edge
+          - firefox
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout do código
+        uses: actions/checkout@v6
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '26'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Executar Smoke Tests
+        run: >
+          mvn --batch-mode test
+          -Psmoke
+          -Dbrowser=${{ matrix.browser }}
+          -Dheadless=true
+
+      - name: Upload dos screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-${{ matrix.browser }}
+          path: target/screenshots/
+
+      - name: Upload dos relatórios do Surefire
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports-${{ matrix.browser }}
+          path: target/surefire-reports/
