@@ -18,6 +18,30 @@ O projeto conta com:
 - Captura automática de screenshots em falhas.
 - Relatórios com **Allure**.
 - **GitHub Actions** com execução cross-browser em Chrome, Edge e Firefox.
+- Pipeline de **Smoke em Pull Requests** e **Regression na branch main ou manualmente**.
+- Geração e publicação do relatório Allure pelo pipeline de CI.
+
+## CI/CD
+
+O pipeline utiliza Maven Profiles e propriedades de execução para controlar a suíte e o navegador:
+
+```text
+Pull Request
+    ↓
+Smoke Tests
+    ├── Chrome
+    ├── Edge
+    └── Firefox
+
+Push na main / execução manual
+    ↓
+Regression Tests
+    ├── Chrome
+    ├── Edge
+    └── Firefox
+    ↓
+Allure Report
+```
 
 ## Estrutura
 
