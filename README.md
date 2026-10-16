@@ -51,6 +51,75 @@ O relatório mais recente da suíte de Regression é publicado automaticamente p
 
 [🔎 Visualizar Allure Report](https://lspenserl.github.io/Selenium_Saucedemo_Portfolio/)
 
+## Como executar os testes
+
+### Pré-requisitos
+
+- Java 26
+- Maven
+- Chrome, Edge ou Firefox
+
+### Executar todos os testes
+
+Na raiz do projeto:
+
+```bash
+mvn clean test
+```
+
+### Executar apenas Smoke Tests
+
+```bash
+mvn clean test -Psmoke
+```
+
+### Executar apenas Regression Tests
+
+```bash
+mvn clean test -Pregression
+```
+
+### Executar em um navegador específico
+
+O navegador pode ser informado pela propriedade `browser`:
+
+```bash
+mvn clean test -Psmoke -Dbrowser=chrome
+mvn clean test -Psmoke -Dbrowser=edge
+mvn clean test -Psmoke -Dbrowser=firefox
+```
+
+### Executar em modo Headless
+
+Para executar sem abrir a janela do navegador:
+
+```bash
+mvn clean test -Pregression -Dbrowser=chrome -Dheadless=true
+```
+
+### Alterar o timeout
+
+O timeout padrão é definido em `config.properties` e pode ser sobrescrito por linha de comando:
+
+```bash
+mvn clean test -Dbrowser=chrome -Dwait.timeout=20
+```
+
+### Gerar e visualizar o relatório Allure localmente
+
+Após executar os testes:
+
+```bash
+allure generate target/allure-results -o target/allure-report
+allure open target/allure-report
+```
+
+Os screenshots capturados em caso de falha ficam disponíveis em:
+
+```text
+target/screenshots/
+```
+
 ## Estrutura
 
 ```text
